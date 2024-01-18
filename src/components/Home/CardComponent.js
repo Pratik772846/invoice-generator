@@ -45,7 +45,7 @@ const CardComponent = ({ invoiceData}) => {
     }
     const getNextInvoiceNumber = () => {
         if (invoices.length > 0) {
-          const lastInvoiceNumber = invoices[invoices.length - 1].invoiceNumber;
+          const lastInvoiceNumber = parseInt(invoices[invoices.length - 1].invoiceNumber,10);
           return lastInvoiceNumber + 1;
         } else {
           return 1;
