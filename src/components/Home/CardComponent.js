@@ -6,6 +6,7 @@ import InvoiceView from './InvoiceView';
 import { ImCross } from "react-icons/im";
 import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+// custom style for react modal
 const customStyles = {
     content: {
       top: '50%',
@@ -15,7 +16,7 @@ const customStyles = {
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       width: '50%',
-      height: '80vh', // set the desired height
+      height: '80vh', 
       overflow: 'auto',
     },
   };
@@ -36,15 +37,19 @@ const CardComponent = ({ invoiceData}) => {
       setIsOpen(false);
     }
     const dispatch  = useDispatch();
+    // function for performing view invoice action
+    // opens the react modal containing all info
     const onView = ()=>{
         setIsOpen(true);
     }
+    // function for performing delete invoice action
     const onDelete =()=>{
         dispatch(deleteInvoice(invoiceNumber));
     }
     const onEdit = ()=>{
       navigate("/edit", { state: invoiceData });
     }
+    // getting next invoice number in case of copying invoice
     const getNextInvoiceNumber = () => {
         if (invoices.length > 0) {
           const lastInvoiceNumber = parseInt(invoices[invoices.length - 1].invoiceNumber,10);
@@ -61,6 +66,7 @@ const CardComponent = ({ invoiceData}) => {
 
     const onCopy = () => {
         // Create a copy of the existing invoice data
+        // and assign a new invoice number
         const copiedInvoiceData = {
             isOpen: false,
             currency: invoiceData.currency,
